@@ -1,30 +1,64 @@
-# SkipShorts
+# SkipShorts: block YouTube Shorts and Facebook Reels
 
-Chrome extension that hides YouTube Shorts and Facebook Reels from your feeds.
+A free, open-source Chrome extension that **removes YouTube Shorts and Facebook Reels from your feeds**,
+so you can watch what you came for without getting pulled into endless short-video scrolling.
 
-## Install
-
-1. Open `chrome://extensions`
-2. Turn on **Developer mode**
-3. Click **Load unpacked** and select this folder
-
-Use the toolbar popup to toggle each site. Changes apply immediately, with no reload needed.
+- No tracking, no ads, no data collection. It only stores your on/off settings.
+- No account, no setup. Install it and Shorts and Reels disappear.
+- Tiny and fast: plain CSS and a few lines of JavaScript, with no remote code.
 
 ## What it hides
 
-**YouTube:** Shorts shelves (home, subscriptions, search, watch sidebar), individual Shorts in grids and lists,
-the Shorts sidebar entry, the channel Shorts tab, and the "Shorts" search filter chip. Optionally sends
-`/shorts/<id>` URLs to the normal `/watch?v=<id>` player.
+**YouTube Shorts**
+- Shorts shelves on the home page, subscriptions, search results, and the watch-page sidebar
+- Individual Shorts mixed into video grids and lists
+- The Shorts button in the sidebar and mini-sidebar
+- The Shorts tab on channel pages and the "Shorts" search filter
+- Optional: opens any `youtube.com/shorts/...` link in the normal video player instead of the Shorts player
 
-**Facebook:** Reels shelves and reel posts in the news feed, groups, and pages, plus the Reels sidebar shortcut.
+**Facebook Reels**
+- "Reels" shelves in the news feed, groups, and pages
+- Reel posts in the feed
+- The Reels shortcut in the left sidebar and the Reels icon in the top bar
 
-## Notes
+Each site can be switched on or off from the toolbar popup. Changes take effect immediately, without reloading the page.
 
-- Elements are hidden with `display: none` rather than deleted from the DOM. Deleting nodes that
-  YouTube's and Facebook's frameworks own tends to break scrolling and infinite loading.
-- Facebook obfuscates its markup, so Reels are found by their `/reel/` links and by shelf headings in English.
+## Install
 
-## Packaging
+The extension isn't on the Chrome Web Store yet. To install it:
+
+1. Download `skipshorts-<version>.zip` from the [latest release](https://github.com/gazillion101/skipshorts/releases/latest) and unzip it.
+2. Open `chrome://extensions` in Chrome.
+3. Turn on **Developer mode** (top-right corner).
+4. Click **Load unpacked** and select the unzipped folder (the one containing `manifest.json`).
+
+It also works in other Chromium browsers: Microsoft Edge, Brave, Opera, and Vivaldi.
+
+## FAQ
+
+**Does it delete anything from my YouTube or Facebook account?**
+No. It only hides Shorts and Reels on the page you're viewing. Nothing is changed in your account.
+
+**Can I still watch a Short if someone sends me a link?**
+Yes. With the redirect option on (the default), a Shorts link opens in the regular YouTube player.
+Turn the option off in the popup to keep the Shorts player.
+
+**Something slipped through. What do I do?**
+YouTube and Facebook change their pages often. Please [open an issue](https://github.com/gazillion101/skipshorts/issues)
+with a screenshot and the page URL.
+
+## How it works
+
+- Elements are hidden with `display: none` rather than deleted from the page. Deleting elements that
+  YouTube's and Facebook's code manages tends to break scrolling and infinite loading.
+- YouTube Shorts are matched by their page elements and `/shorts/` links.
+- Facebook scrambles its page markup, so Reels are found by their `/reel/` links and by shelf headings
+  (headings are matched in English only).
+
+## Building
 
 Run `./package.sh` to build `dist/skipshorts-<version>.zip` (the version comes from `manifest.json`).
-Upload that zip to the Chrome Web Store developer dashboard, or share it so others can unzip it and use **Load unpacked**.
+
+## License
+
+[MIT](LICENSE)
