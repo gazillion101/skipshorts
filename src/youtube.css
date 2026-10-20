@@ -1,0 +1,31 @@
+/* Everything is scoped to html.skipshorts-on so the popup toggle works instantly. */
+
+/* Shorts shelves (home, subscriptions, search, watch sidebar) */
+html.skipshorts-on ytd-reel-shelf-renderer,
+html.skipshorts-on ytd-rich-shelf-renderer[is-shorts],
+html.skipshorts-on ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+html.skipshorts-on grid-shelf-view-model:has(ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2),
+
+/* Individual Shorts mixed into grids and lists */
+html.skipshorts-on ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on ytd-video-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on ytd-grid-video-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on ytd-compact-video-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on yt-lockup-view-model:has(a[href^="/shorts/"]),
+
+/* Navigation entries */
+html.skipshorts-on ytd-guide-entry-renderer:has(a[href="/shorts/"]),
+html.skipshorts-on ytd-mini-guide-entry-renderer:has(a[href="/shorts/"]),
+html.skipshorts-on yt-tab-shape[tab-title="Shorts"],
+
+/* Mobile site (m.youtube.com) */
+html.skipshorts-on ytm-reel-shelf-renderer,
+html.skipshorts-on ytm-rich-section-renderer:has(ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2),
+html.skipshorts-on ytm-rich-item-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on ytm-video-with-context-renderer:has(a[href^="/shorts/"]),
+html.skipshorts-on ytm-pivot-bar-item-renderer:has(.pivot-shorts),
+
+/* Anything the script flagged (text-matched chips, etc.) */
+html.skipshorts-on [data-skipshorts] {
+  display: none !important;
+}

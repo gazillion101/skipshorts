@@ -1,0 +1,6 @@
+:root { color-scheme: light dark; }
+body { font: 13px system-ui, sans-serif; margin: 0; padding: 12px 14px; width: 240px; }
+h1 { font-size: 15px; margin: 0 0 10px; }
+label { display: flex; align-items: center; gap: 8px; padding: 5px 0; cursor: pointer; }
+label.sub { padding-left: 22px; opacity: 0.85; }
+label.sub.off { opacity: 0.4; }
