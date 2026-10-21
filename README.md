@@ -21,6 +21,8 @@ so you can watch what you came for without getting pulled into endless short-vid
 - Ads: sponsored posts in the feed and the "Sponsored" box in the right column
 - Suggested posts: posts from pages and groups you don't follow (the ones with a **Follow** or **Join** button next to the name)
 - Suggestion carousels: "People you may know" and "Your group suggestions"
+- AI content: posts carrying Meta's **AI content** label, including a friend's share of such a post.
+  Only labeled posts are caught; unlabeled AI content can't be detected reliably.
 
 Each of these can be switched on or off separately from the toolbar popup. Changes take effect immediately, without reloading the page.
 

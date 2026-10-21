@@ -6,6 +6,7 @@ const SKIPSHORTS_DEFAULTS = {
   facebookAds: true,
   facebookSuggested: true,
   facebookCarousels: true,
+  facebookAI: true,
 };
 
 function skipShortsSettings(onChange) {

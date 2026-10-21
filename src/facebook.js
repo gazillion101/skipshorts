@@ -16,6 +16,9 @@
     "Suggested groups",
     "Groups you might like",
   ]);
+  // Meta's AI label, shown as a button under the author's name of the post
+  // (or of the shared post inside it).
+  const AI_LABELS = new Set(["AI content", "AI info"]);
   const CAROUSEL_BUTTON = '[aria-label="Add friend" i], [aria-label="Join group" i], [aria-label^="Remove suggested" i]';
 
   let settings = {};
@@ -115,11 +118,21 @@
     }
   }
 
+  function sweepAI() {
+    for (const btn of document.querySelectorAll('[role="main"] [aria-posinset] [role="button"]')) {
+      if (!AI_LABELS.has(text(btn))) continue;
+      if (btn.closest('[data-skipshorts], [aria-label^="Comment"]')) continue;
+      // Also covers a friend sharing an AI-labeled post: the content itself is AI.
+      hide(feedUnitOf(btn));
+    }
+  }
+
   function sweep() {
     if (settings.facebook) sweepReels();
     if (settings.facebookAds) sweepAds();
     if (settings.facebookSuggested) sweepSuggested();
     if (settings.facebookCarousels) sweepCarousels();
+    if (settings.facebookAI) sweepAI();
   }
 
   let scheduled = false;
@@ -137,7 +150,7 @@
     // Start from a clean slate so turning an option off brings its posts back.
     for (const el of document.querySelectorAll("[data-skipshorts]")) el.removeAttribute("data-skipshorts");
 
-    const any = s.facebook || s.facebookAds || s.facebookSuggested || s.facebookCarousels;
+    const any = s.facebook || s.facebookAds || s.facebookSuggested || s.facebookCarousels || s.facebookAI;
     document.documentElement.classList.toggle("skipshorts-on", any);
     if (any && !observer) {
       observer = new MutationObserver(schedule);

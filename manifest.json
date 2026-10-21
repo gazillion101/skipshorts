@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "SkipShorts",
-  "version": "1.1.0",
-  "description": "Removes YouTube Shorts, plus Facebook Reels, ads and suggested posts, from your feeds.",
+  "version": "1.2.0",
+  "description": "Removes YouTube Shorts, plus Facebook Reels, ads, suggested posts and AI-labeled posts, from your feeds.",
   "permissions": [
     "storage"
   ],
