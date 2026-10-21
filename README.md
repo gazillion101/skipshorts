@@ -16,12 +16,12 @@ so you can watch what you came for without getting pulled into endless short-vid
 - The Shorts tab on channel pages and the "Shorts" search filter
 - Optional: opens any `youtube.com/shorts/...` link in the normal video player instead of the Shorts player
 
-**Facebook Reels**
-- "Reels" shelves in the news feed, groups, and pages
-- Reel posts in the feed
-- The Reels shortcut in the left sidebar and the Reels icon in the top bar
+**Facebook**
+- Reels: "Reels" shelves and reel posts in the feed, the Reels shortcut in the left sidebar, and the Reels icon in the top bar
+- Ads: sponsored posts in the feed and the "Sponsored" box in the right column
+- Suggested posts: posts from pages and groups you don't follow (the ones with a **Follow** or **Join** button next to the name)
 
-Each site can be switched on or off from the toolbar popup. Changes take effect immediately, without reloading the page.
+Each of these can be switched on or off separately from the toolbar popup. Changes take effect immediately, without reloading the page.
 
 ## Install
 
@@ -52,8 +52,9 @@ with a screenshot and the page URL.
 - Elements are hidden with `display: none` rather than deleted from the page. Deleting elements that
   YouTube's and Facebook's code manages tends to break scrolling and infinite loading.
 - YouTube Shorts are matched by their page elements and `/shorts/` links.
-- Facebook scrambles its page markup, so Reels are found by their `/reel/` links and by shelf headings
-  (headings are matched in English only).
+- Facebook scrambles its page markup, so posts are found by structure: Reels by their `/reel/` links,
+  ads by their ad-link labels, and suggested posts by the Follow/Join button in the post header.
+  Text labels (shelf titles, "Sponsored", "Follow", "Join") are matched in English only.
 
 ## Building
 

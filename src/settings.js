@@ -2,7 +2,9 @@
 const SKIPSHORTS_DEFAULTS = {
   youtube: true,
   youtubeRedirect: true,
-  facebook: true,
+  facebook: true, // Reels
+  facebookAds: true,
+  facebookSuggested: true,
 };
 
 function skipShortsSettings(onChange) {
