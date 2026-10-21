@@ -5,6 +5,7 @@ const SKIPSHORTS_DEFAULTS = {
   facebook: true, // Reels
   facebookAds: true,
   facebookSuggested: true,
+  facebookCarousels: true,
 };
 
 function skipShortsSettings(onChange) {

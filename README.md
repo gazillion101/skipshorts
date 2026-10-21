@@ -20,6 +20,7 @@ so you can watch what you came for without getting pulled into endless short-vid
 - Reels: "Reels" shelves and reel posts in the feed, the Reels shortcut in the left sidebar, and the Reels icon in the top bar
 - Ads: sponsored posts in the feed and the "Sponsored" box in the right column
 - Suggested posts: posts from pages and groups you don't follow (the ones with a **Follow** or **Join** button next to the name)
+- Suggestion carousels: "People you may know" and "Your group suggestions"
 
 Each of these can be switched on or off separately from the toolbar popup. Changes take effect immediately, without reloading the page.
 
@@ -54,7 +55,8 @@ with a screenshot and the page URL.
 - YouTube Shorts are matched by their page elements and `/shorts/` links.
 - Facebook scrambles its page markup, so posts are found by structure: Reels by their `/reel/` links,
   ads by their ad-link labels, and suggested posts by the Follow/Join button in the post header.
-  Text labels (shelf titles, "Sponsored", "Follow", "Join") are matched in English only.
+  Suggestion carousels are found by their titles and Join group buttons.
+  Text labels (shelf and carousel titles, "Sponsored", "Follow", "Join") are matched in English only.
 
 ## Building
 

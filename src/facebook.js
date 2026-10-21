@@ -7,6 +7,16 @@
   const AD_MARKER = '[aria-label^="Open ad link"], a[attributionsrc], a[href*="/ads/about"]';
   // Posts from pages/groups you don't follow show a Follow or Join button next to the author.
   const SUGGEST_BUTTONS = new Set(["Follow", "Join"]);
+  // "People you may know" / "Your group suggestions" carousels: found by title,
+  // or by having several Add friend / Join group / Remove suggestion buttons.
+  const CAROUSEL_TITLES = new Set([
+    "People you may know",
+    "People you might know",
+    "Your group suggestions",
+    "Suggested groups",
+    "Groups you might like",
+  ]);
+  const CAROUSEL_BUTTON = '[aria-label="Add friend" i], [aria-label="Join group" i], [aria-label^="Remove suggested" i]';
 
   let settings = {};
   let observer = null;
@@ -90,10 +100,26 @@
     }
   }
 
+  function sweepCarousels() {
+    for (const b of document.querySelectorAll(`[role="main"] [aria-posinset] :is(${CAROUSEL_BUTTON})`)) {
+      if (b.closest("[data-skipshorts]")) continue;
+      const unit = feedUnitOf(b);
+      if (unit && unit.querySelectorAll(CAROUSEL_BUTTON).length >= 2) hide(unit);
+    }
+    for (const h of document.querySelectorAll(
+      '[role="main"] [aria-posinset] :is(h2, h3, h4, [role="heading"], span[dir="auto"])'
+    )) {
+      if (!CAROUSEL_TITLES.has(text(h))) continue;
+      if (h.closest("[data-skipshorts]")) continue;
+      hide(feedUnitOf(h));
+    }
+  }
+
   function sweep() {
     if (settings.facebook) sweepReels();
     if (settings.facebookAds) sweepAds();
     if (settings.facebookSuggested) sweepSuggested();
+    if (settings.facebookCarousels) sweepCarousels();
   }
 
   let scheduled = false;
@@ -111,7 +137,7 @@
     // Start from a clean slate so turning an option off brings its posts back.
     for (const el of document.querySelectorAll("[data-skipshorts]")) el.removeAttribute("data-skipshorts");
 
-    const any = s.facebook || s.facebookAds || s.facebookSuggested;
+    const any = s.facebook || s.facebookAds || s.facebookSuggested || s.facebookCarousels;
     document.documentElement.classList.toggle("skipshorts-on", any);
     if (any && !observer) {
       observer = new MutationObserver(schedule);
