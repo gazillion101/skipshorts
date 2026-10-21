@@ -1,6 +1,6 @@
 # SkipShorts: block YouTube Shorts and Facebook Reels
 
-A free, open-source Chrome extension that **removes YouTube Shorts and Facebook Reels from your feeds**,
+A free, open-source Chrome and Firefox extension that **removes YouTube Shorts and Facebook Reels from your feeds**,
 so you can watch what you came for without getting pulled into endless short-video scrolling.
 
 - No tracking, no ads, no data collection. It only stores your on/off settings.
@@ -25,14 +25,20 @@ Each site can be switched on or off from the toolbar popup. Changes take effect 
 
 ## Install
 
-The extension isn't on the Chrome Web Store yet. To install it:
+The extension isn't on the Chrome Web Store or Firefox Add-ons yet. To install it:
 
-1. Download `skipshorts-<version>.zip` from the [latest release](https://github.com/gazillion101/skipshorts/releases/latest) and unzip it.
-2. Open `chrome://extensions` in Chrome.
-3. Turn on **Developer mode** (top-right corner).
-4. Click **Load unpacked** and select the unzipped folder (the one containing `manifest.json`).
+1. Download the ZIP for your browser from the [latest release](https://github.com/gazillion101/skipshorts/releases/latest) and unzip it.
+2. In Chrome:
+   - Open `chrome://extensions`.
+   - Turn on **Developer mode** (top-right corner).
+   - Click **Load unpacked** and select the unzipped Chrome package folder.
+3. In Firefox Desktop 140 or newer:
+   - Open `about:debugging#/runtime/this-firefox`.
+   - Click **Load Temporary Add-on...** and select `manifest.json` from the unzipped Firefox package.
 
-It also works in other Chromium browsers: Microsoft Edge, Brave, Opera, and Vivaldi.
+Temporary Firefox add-ons are removed when Firefox closes. Firefox users can install it normally after it is published on Firefox Add-ons (AMO).
+
+The extension also works in other Chromium browsers: Microsoft Edge, Brave, Opera, and Vivaldi.
 
 ## FAQ
 
@@ -57,7 +63,14 @@ with a screenshot and the page URL.
 
 ## Building
 
-Run `./package.sh` to build `dist/skipshorts-<version>.zip` (the version comes from `manifest.json`).
+Run `./package.sh` to build:
+
+- `dist/skipshorts-<version>.zip` for Chrome and other Chromium browsers.
+- `dist/skipshorts-firefox-<version>.zip` for Firefox and AMO submission.
+
+The Firefox package uses the same readable source files and a Firefox-specific manifest. Run `node test_firefox_storage.js` to check that Firefox keeps settings local while Chromium keeps using sync storage. To check the package before submission, extract the Firefox ZIP and run `web-ext lint` in that directory (`web-ext` is available via `npm install --global web-ext`). The extension code is not bundled or minified, so it normally does not need a separate source archive for AMO review.
+
+Firefox keeps its settings on the device; Chrome continues syncing settings through Chrome storage.
 
 ## License
 
