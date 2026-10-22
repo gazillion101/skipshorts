@@ -93,13 +93,17 @@
   }
 
   function sweepSuggested() {
-    for (const btn of document.querySelectorAll('[role="main"] [aria-posinset] h4 [role="button"]')) {
+    // The Follow/Join control is usually a button inside an h4, but Facebook
+    // varies the heading level and sometimes renders it as a link.
+    for (const btn of document.querySelectorAll(
+      '[role="main"] :is(h2, h3, h4) :is([role="button"], [role="link"], a)'
+    )) {
       if (!SUGGEST_BUTTONS.has(text(btn))) continue;
-      if (btn.closest("[data-skipshorts]")) continue;
+      if (btn.closest('[data-skipshorts], [aria-label^="Comment"]')) continue;
       // Only the post's own header counts; a shared post nested inside a
       // friend's post has its own header and Follow button.
       const unit = feedUnitOf(btn);
-      if (unit && unit.querySelector("h4") === btn.closest("h4")) hide(unit);
+      if (unit && unit.querySelector("h2, h3, h4") === btn.closest("h2, h3, h4")) hide(unit);
     }
   }
 
