@@ -92,18 +92,27 @@
     }
   }
 
+  // True when el sits in the post's own header (next to or inside the author's
+  // name). The header is a few levels up; a shared post nested further down
+  // has its own header much deeper in the tree.
+  function inOwnHeader(el, unit) {
+    const header = unit.querySelector("h2, h3, h4");
+    if (!header) return false;
+    let n = el;
+    for (let i = 0; i < 6 && n && n !== unit; i++, n = n.parentElement) {
+      if (n.contains(header)) return true;
+    }
+    return false;
+  }
+
   function sweepSuggested() {
-    // The Follow/Join control is usually a button inside an h4, but Facebook
-    // varies the heading level and sometimes renders it as a link.
-    for (const btn of document.querySelectorAll(
-      '[role="main"] :is(h2, h3, h4) :is([role="button"], [role="link"], a)'
-    )) {
+    // The Follow/Join control's markup varies (button or link, inside or next
+    // to the heading), so look at every such control and check its position.
+    for (const btn of document.querySelectorAll('[role="main"] :is([role="button"], [role="link"], a)')) {
       if (!SUGGEST_BUTTONS.has(text(btn))) continue;
       if (btn.closest('[data-skipshorts], [aria-label^="Comment"]')) continue;
-      // Only the post's own header counts; a shared post nested inside a
-      // friend's post has its own header and Follow button.
       const unit = feedUnitOf(btn);
-      if (unit && unit.querySelector("h2, h3, h4") === btn.closest("h2, h3, h4")) hide(unit);
+      if (unit && inOwnHeader(btn, unit)) hide(unit);
     }
   }
 
