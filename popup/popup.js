@@ -7,12 +7,12 @@ function syncSub() {
   sub.parentElement.classList.toggle("off", !yt);
 }
 
-chrome.storage.sync.get(SKIPSHORTS_DEFAULTS, (s) => {
+chrome.storage[SKIPSHORTS_STORAGE_AREA].get(SKIPSHORTS_DEFAULTS, (s) => {
   for (const id of ids) {
     const box = document.getElementById(id);
     box.checked = s[id];
     box.addEventListener("change", () => {
-      chrome.storage.sync.set({ [id]: box.checked });
+      chrome.storage[SKIPSHORTS_STORAGE_AREA].set({ [id]: box.checked });
       syncSub();
     });
   }
