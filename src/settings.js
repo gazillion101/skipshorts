@@ -9,10 +9,14 @@ const SKIPSHORTS_DEFAULTS = {
   facebookAI: true,
 };
 
+// Firefox Sync transmits preferences, so keep Firefox settings local.
+const SKIPSHORTS_STORAGE_AREA =
+  typeof browser !== "undefined" && typeof browser.runtime.getBrowserInfo === "function" ? "local" : "sync";
+
 function skipShortsSettings(onChange) {
   const apply = (s) => onChange({ ...SKIPSHORTS_DEFAULTS, ...s });
-  chrome.storage.sync.get(SKIPSHORTS_DEFAULTS, apply);
+  chrome.storage[SKIPSHORTS_STORAGE_AREA].get(SKIPSHORTS_DEFAULTS, apply);
   chrome.storage.onChanged.addListener((_changes, area) => {
-    if (area === "sync") chrome.storage.sync.get(SKIPSHORTS_DEFAULTS, apply);
+    if (area === SKIPSHORTS_STORAGE_AREA) chrome.storage[SKIPSHORTS_STORAGE_AREA].get(SKIPSHORTS_DEFAULTS, apply);
   });
 }
