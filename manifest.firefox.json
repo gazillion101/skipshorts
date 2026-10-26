@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "SkipShorts",
-  "version": "1.0.0",
-  "description": "Removes Shorts from YouTube and Reels from Facebook feeds.",
+  "version": "1.2.2",
+  "description": "Removes YouTube Shorts, plus Facebook Reels, ads, suggested posts and AI-labeled posts, from your feeds.",
   "permissions": ["storage"],
   "icons": {
     "16": "icons/icon16.png",
@@ -32,7 +32,7 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "skipshorts@jgalus.github",
+      "id": "skipshorts@gazillion101.github",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
