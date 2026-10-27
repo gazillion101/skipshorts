@@ -35,11 +35,11 @@ The extension isn't on the Chrome Web Store or Firefox Add-ons yet. To install i
    - Open `chrome://extensions`.
    - Turn on **Developer mode** (top-right corner).
    - Click **Load unpacked** and select the unzipped Chrome package folder.
-3. In Firefox Desktop 140 or newer:
+3. In Firefox Desktop 121 or newer, or Firefox for Android 142 or newer:
    - Open `about:debugging#/runtime/this-firefox`.
    - Click **Load Temporary Add-on...** and select `manifest.json` from the unzipped Firefox package.
 
-Temporary Firefox add-ons are removed when Firefox closes. Firefox users can install it normally after it is published on Firefox Add-ons (AMO).
+Temporary Firefox add-ons are removed when Firefox closes. For a permanent install before an AMO listing exists, sign the package for self-distribution (see [Building](#building)) and open the resulting `.xpi` in Firefox with **File → Open File**, or drag it onto a Firefox window.
 
 The extension also works in other Chromium browsers: Microsoft Edge, Brave, Opera, and Vivaldi.
 
@@ -75,7 +75,19 @@ Run `./package.sh` to build:
 
 The Firefox package uses the same readable source files. Its `manifest.json` is `manifest.json` with the Firefox-only keys from `manifest.firefox.json` (add-on ID, minimum version, data-collection declaration) merged in, so the version and description are only edited in `manifest.json`. Run `node test_firefox_storage.js` to check that Firefox keeps settings local while Chromium keeps using sync storage. To check the package before submission, extract the Firefox ZIP and run `web-ext lint` in that directory (`web-ext` is available via `npm install --global web-ext`). The extension code is not bundled or minified, so it normally does not need a separate source archive for AMO review.
 
+The Firefox minimum version is 121, which is where the CSS `:has()` selector that hides the Shorts shelves landed; below that the extension installs and hides nothing. Firefox for Android is set separately to 142, the first Android version that understands the data-collection declaration, which also keeps `web-ext lint` free of warnings.
+
 Firefox keeps its settings on the device; Chrome continues syncing settings through Chrome storage.
+
+### Signing the Firefox package
+
+Release Firefox installs only signed extensions, so a release carrying just the ZIP can be loaded temporarily but not installed permanently. With credentials from <https://addons.mozilla.org/developers/addon/api/key/>, sign the extracted package for self-distribution:
+
+```
+WEB_EXT_API_KEY='user:...' WEB_EXT_API_SECRET='...' npx web-ext sign --source-dir <extracted package> --channel unlisted
+```
+
+Review is automated and takes a few minutes; the signed `.xpi` lands in `web-ext-artifacts/`, ready to attach to the GitHub release. Unlisted means self-distribution only: the add-on is signed but not published in the AMO directory. Two things to know. Every signing needs a new `version` in `manifest.json`, because AMO rejects a build it has already accepted (`This upload has already been submitted`). And if the run is interrupted after the upload, the version still exists on AMO — download the signed file from the Developer Hub under **Manage Status & Versions** instead of signing again.
 
 ## License
 
