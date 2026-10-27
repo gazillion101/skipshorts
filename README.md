@@ -25,6 +25,12 @@ so you can watch what you came for without getting pulled into endless short-vid
 - AI content: posts carrying Meta's **AI content** label, including a friend's share of such a post.
   Only labeled posts are caught; unlabeled AI content can't be detected reliably.
 
+**X (Twitter)**, opt-in: click **Turn on for X** in the popup, which asks for access to x.com
+- Promoted posts
+- "Who to follow" suggestions in the home timeline and the right column
+- Grok in the navigation
+- Optional, off by default: video posts in the home timeline
+
 Each of these can be switched on or off separately from the toolbar popup. Changes take effect immediately, without reloading the page.
 
 ## Install
@@ -66,6 +72,8 @@ with a screenshot and the page URL.
   ads by their ad-link labels, and suggested posts by the Follow/Join button in the post header.
   Suggestion carousels are found by their titles and Join group buttons.
   Text labels (shelf and carousel titles, "Sponsored", "Follow", "Join") are matched in English only.
+- X marks its page elements with `data-testid` attributes, so X detection works in any interface language.
+  Access to x.com is requested only when you turn X on, and the X script is registered only after that.
 
 ## Building
 

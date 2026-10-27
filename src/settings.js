@@ -1,4 +1,5 @@
 // Shared settings helper, loaded before each site script.
+const SKIPSHORTS_X_ORIGINS = ["*://*.x.com/*"];
 const SKIPSHORTS_DEFAULTS = {
   youtube: true,
   youtubeRedirect: true,
@@ -8,6 +9,11 @@ const SKIPSHORTS_DEFAULTS = {
   facebookSuggested: true,
   facebookCarousels: true,
   facebookAI: true,
+  // X options only take effect once access to x.com is granted from the popup.
+  xAds: true,
+  xFollow: true,
+  xGrok: true,
+  xVideo: false,
 };
 
 // Firefox Sync transmits preferences, so keep Firefox settings local. Detected

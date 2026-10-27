@@ -1,0 +1,19 @@
+/* Each option is scoped to its own class on <html>, toggled by src/x.js. */
+
+/* Promoted posts: ads carry impression-tracking pixels that normal posts don't. */
+html.skipshorts-x-ads [data-testid="cellInnerDiv"]:has([data-testid="top-impression-pixel"]) > *,
+
+/* "Who to follow" in the right column. In the timeline it is found by src/x.js. */
+html.skipshorts-x-follow [data-testid="sidebarColumn"] aside:has([data-testid="UserCell"]),
+
+/* Grok entries in the side and bottom navigation. */
+html.skipshorts-x-grok :is(header, nav) a[href^="/i/grok"],
+
+/* Video posts in the home timeline (off by default). */
+html.skipshorts-x-video.skipshorts-x-home [data-testid="primaryColumn"] [data-testid="cellInnerDiv"]:has([data-testid="videoPlayer"]) > *,
+
+/* Timeline cells flagged by the script. The cell itself stays so X's virtual
+   list can still measure it; only its content is hidden. */
+html [data-testid="cellInnerDiv"][data-skipshorts] > * {
+  display: none !important;
+}
