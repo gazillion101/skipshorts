@@ -73,7 +73,7 @@ Run `./package.sh` to build:
 - `dist/skipshorts-<version>.zip` for Chrome and other Chromium browsers.
 - `dist/skipshorts-firefox-<version>.zip` for Firefox and AMO submission.
 
-The Firefox package uses the same readable source files and a Firefox-specific manifest. Run `node test_firefox_storage.js` to check that Firefox keeps settings local while Chromium keeps using sync storage. To check the package before submission, extract the Firefox ZIP and run `web-ext lint` in that directory (`web-ext` is available via `npm install --global web-ext`). The extension code is not bundled or minified, so it normally does not need a separate source archive for AMO review.
+The Firefox package uses the same readable source files. Its `manifest.json` is `manifest.json` with the Firefox-only keys from `manifest.firefox.json` (add-on ID, minimum version, data-collection declaration) merged in, so the version and description are only edited in `manifest.json`. Run `node test_firefox_storage.js` to check that Firefox keeps settings local while Chromium keeps using sync storage. To check the package before submission, extract the Firefox ZIP and run `web-ext lint` in that directory (`web-ext` is available via `npm install --global web-ext`). The extension code is not bundled or minified, so it normally does not need a separate source archive for AMO review.
 
 Firefox keeps its settings on the device; Chrome continues syncing settings through Chrome storage.
 

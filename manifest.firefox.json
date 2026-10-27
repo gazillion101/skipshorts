@@ -1,35 +1,4 @@
 {
-  "manifest_version": 3,
-  "name": "SkipShorts",
-  "version": "1.2.2",
-  "description": "Removes YouTube Shorts, plus Facebook Reels, ads, suggested posts and AI-labeled posts, from your feeds.",
-  "permissions": ["storage"],
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png"
-    }
-  },
-  "content_scripts": [
-    {
-      "matches": ["*://*.youtube.com/*"],
-      "css": ["src/youtube.css"],
-      "js": ["src/settings.js", "src/youtube.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://*.facebook.com/*"],
-      "css": ["src/facebook.css"],
-      "js": ["src/settings.js", "src/facebook.js"],
-      "run_at": "document_start"
-    }
-  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "skipshorts@gazillion101.github",
