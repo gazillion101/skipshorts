@@ -9,9 +9,10 @@ const SKIPSHORTS_DEFAULTS = {
   facebookAI: true,
 };
 
-// Firefox Sync transmits preferences, so keep Firefox settings local.
-const SKIPSHORTS_STORAGE_AREA =
-  typeof browser !== "undefined" && typeof browser.runtime.getBrowserInfo === "function" ? "local" : "sync";
+// Firefox Sync transmits preferences, so keep Firefox settings local. Detected
+// by the extension URL scheme, which (unlike runtime.getBrowserInfo) is also
+// available to content scripts, so the popup and the pages agree on the area.
+const SKIPSHORTS_STORAGE_AREA = chrome.runtime.getURL("").startsWith("moz-extension:") ? "local" : "sync";
 
 function skipShortsSettings(onChange) {
   const apply = (s) => onChange({ ...SKIPSHORTS_DEFAULTS, ...s });
