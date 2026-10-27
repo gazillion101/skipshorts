@@ -2,6 +2,7 @@
 const SKIPSHORTS_DEFAULTS = {
   youtube: true,
   youtubeRedirect: true,
+  youtubePromos: true,
   facebook: true, // Reels
   facebookAds: true,
   facebookSuggested: true,

@@ -29,3 +29,10 @@ html.skipshorts-on ytm-pivot-bar-item-renderer:has(.pivot-shorts),
 html.skipshorts-on [data-skipshorts] {
   display: none !important;
 }
+
+/* "YouTube featured" promo banners on the home page (separate option). */
+html.skipshorts-promos ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+html.skipshorts-promos ytd-statement-banner-renderer,
+html.skipshorts-promos ytm-statement-banner-renderer {
+  display: none !important;
+}

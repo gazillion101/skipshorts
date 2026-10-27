@@ -52,6 +52,7 @@
   window.addEventListener("popstate", redirectShorts);
 
   skipShortsSettings((s) => {
+    document.documentElement.classList.toggle("skipshorts-promos", s.youtubePromos);
     enabled = s.youtube;
     redirect = s.youtubeRedirect;
     enabled ? start() : stop();

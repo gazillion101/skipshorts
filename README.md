@@ -15,6 +15,7 @@ so you can watch what you came for without getting pulled into endless short-vid
 - The Shorts button in the sidebar and mini-sidebar
 - The Shorts tab on channel pages and the "Shorts" search filter
 - Optional: opens any `youtube.com/shorts/...` link in the normal video player instead of the Shorts player
+- "YouTube featured" promo banners on the home page (YouTube's own promotions for artists, events and campaigns)
 
 **Facebook**
 - Reels: "Reels" shelves and reel posts in the feed, the Reels shortcut in the left sidebar, and the Reels icon in the top bar
